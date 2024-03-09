@@ -16,17 +16,21 @@ import java.util.List;
 public class OrderItem implements Serializable {
 
     @Id
-    @GeneratedValue (strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     public int idOrderItem;
     public int quantity;
-    @ManyToMany
+
+    @ManyToOne
     @ToString.Exclude
-    @JsonIgnore
-    public List<Product> products;
+    public Product product;
 
     @ManyToOne
     @ToString.Exclude
     @JsonIgnore
     public Orderr orderr;
+
+    @ManyToOne
+
+    public User user;
 
 }

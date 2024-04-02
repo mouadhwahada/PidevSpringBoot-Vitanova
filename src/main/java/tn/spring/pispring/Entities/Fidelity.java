@@ -14,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Fidelite implements Serializable {
+public class Fidelity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +22,6 @@ public class Fidelite implements Serializable {
     private Long point;
     private String niveau;
 
-    @OneToOne(mappedBy = "fidelite")
+    @OneToOne(mappedBy = "fidelity")
     private User user;
 }

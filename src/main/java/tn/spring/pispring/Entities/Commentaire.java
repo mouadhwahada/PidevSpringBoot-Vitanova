@@ -38,6 +38,10 @@ public class Commentaire implements Serializable {
     @OneToMany(mappedBy = "commentaire", cascade = CascadeType.ALL)
     private List<React> reactions ;
 
+    @OneToMany(mappedBy ="c" )
+    private List<Commentaire> commentaires;
+    @ManyToOne
+    Commentaire c;
 
     // Auteur: Utilisateur (classe représentant l'auteur du commentaire)
            // Réponses: List<Commentaire> (liste des réponses à ce commentaire)

@@ -40,10 +40,10 @@ public class User implements Serializable {
     @ManyToOne
     Role role;
 
-    @ManyToOne
+    @OneToOne
     private NutritionalGoal nutritionalGoal;
     @OneToOne
-    private Fidelite fidelite;
+    private Fidelity fidelity;
 
     @ToString.Exclude
     @JsonIgnore

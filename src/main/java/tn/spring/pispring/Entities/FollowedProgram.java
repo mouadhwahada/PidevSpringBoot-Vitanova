@@ -1,6 +1,7 @@
 package tn.spring.pispring.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,16 +19,14 @@ public class FollowedProgram implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id_FollowedProgram;
     private String weightGoal;
-    private String steps;
-    private String duration;
-    private String height;
-    private String Neck;
-    private String Waist;
-    @ManyToOne(cascade = CascadeType.ALL)
-    Workoutprogram  workoutprogramss ;
+    private double currentWeight;
+    private double waist;
+    private double hip;
+    private double chest;
 
+    @JsonIgnore
     @ManyToOne
     User userworkout;
 }

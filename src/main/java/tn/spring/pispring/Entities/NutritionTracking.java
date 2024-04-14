@@ -1,6 +1,7 @@
 package tn.spring.pispring.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,14 +19,24 @@ public class NutritionTracking implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idNutTrack;
-    private LocalDate dateNut;
-    private Long total_calories;
+    private long idNutTrack;
+    private String dateNut;
+    private long total_calories;
+    @Transient
+    private int quantity;
 
     @ManyToOne
     private NutritionalGoal nutritiongoal;
 
     @OneToMany(mappedBy = "nuttrack")
+    @JsonIgnore
     private List<Food> consumedFoods;
+
+
+
+
+    public void setDateNut() {
+        this.dateNut = LocalDate.now().toString();
+    }
 
 }

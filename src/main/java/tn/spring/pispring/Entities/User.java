@@ -40,7 +40,7 @@ public class User implements Serializable {
     @ManyToOne
     Role role;
 
-    @ManyToOne
+    @OneToOne
     private NutritionalGoal nutritionalGoal;
     @OneToOne
     private Fidelity fidelity;

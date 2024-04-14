@@ -29,12 +29,12 @@ public class Question implements Serializable {
     String textQ;
 
     @JsonProperty("answerList")
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     List<Answer> answerList;
 
-
+/*
     @ManyToOne
     @JsonProperty("quiz")
     Quiz quiz;
-
+*/
 }

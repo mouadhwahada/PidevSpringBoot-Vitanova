@@ -24,12 +24,12 @@ public class NoteService implements NoteInterface {
 
     @Override
     public Note UpdateNote(Long id, Note updatedNote) {
+        Long idQuiz;
         Optional<Note> optionalNote = noteRepo.findById(id);
 
         if (optionalNote.isPresent()) {
             Note existingNote = optionalNote.get();
             existingNote.setValueNote(updatedNote.getValueNote());
-            existingNote.setOperation(updatedNote.getOperation());
             existingNote.setDescNote(updatedNote.getDescNote());
 
             return noteRepo.save(existingNote);
@@ -79,6 +79,23 @@ public class NoteService implements NoteInterface {
            return e.getMessage();
        }
     }
+
+    public double[] StatisticsOfNotes() {
+        double criticalLevelCount = 0, attentionRequiredCount = 0, goodStateCount = 0;
+        List<Note> notes = noteRepo.findAll();
+        for (Note note : notes) {
+            if (note.getDescNote().equals("Your mental health is at a critical level. Seeking professional help is highly recommended.")) {
+                criticalLevelCount++;
+            } else if (note.getDescNote().equals("Your mental health condition requires attention. It's important to address these challenges.")) {
+                attentionRequiredCount++;
+            } else if (note.getDescNote().equals("Your mental health seems to be in a good state. Keep up the healthy habits!")) {
+                goodStateCount++;
+            }
+        }
+        return new double[] { criticalLevelCount, attentionRequiredCount, goodStateCount };
+    }
+
+
 
 
 

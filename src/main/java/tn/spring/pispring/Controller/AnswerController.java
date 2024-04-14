@@ -17,9 +17,18 @@ import java.util.Map;
 public class AnswerController {
     @Autowired
     AnswerService answerService;
-    @PostMapping("/addAnswerToQuestion")
+ /*   @PostMapping("/addAnswerToQuestion")
     public Answer addAnswerToQuestion(@RequestParam String textQ, @RequestBody Answer answer) {
         return answerService.addAnswerToQuestion(textQ, answer);
+    }*/
+
+    @PostMapping("/addAnswerToQuestion/{idQuestion}/{idAnswer}")
+    public Answer addAnswerToQuestion(@PathVariable Long idQuestion, @PathVariable Long idAnswer) {
+        return answerService.addAnswerToQuestion(idQuestion, idAnswer);
+    }
+    @DeleteMapping("/removeAnswerFromQuestion/{idQuestion}/{idAnswer}")
+    public Answer removeAnswerFromQuestion(@PathVariable Long idQuestion, @PathVariable Long idAnswer) {
+        return answerService.removeAnswerFromQuestion(idQuestion, idAnswer);
     }
 
     @PostMapping("/addAnswer")
@@ -53,15 +62,15 @@ public class AnswerController {
         return answerService.findAnswerById(id);
     }
 
-    @GetMapping("/getAnswersForQuestion/{questionId}")
+  /*  @GetMapping("/getAnswersForQuestion/{questionId}")
     public List<Answer> getAnswersForQuestion(@PathVariable("questionId") Long questionId) {
         return answerService.getAnswersForQuestion(questionId);
-    }
+    }*/
 
-    @GetMapping("/getQuestionsWithAnswersForQuiz/{quizId}")
+ /*   @GetMapping("/getQuestionsWithAnswersForQuiz/{quizId}")
     public List<Question> getQuestionsWithAnswersForQuiz(@PathVariable Long quizId) {
         return answerService.getQuestionsWithAnswersForQuiz(quizId);
-    }
+    }*/
     @PostMapping("/calculateQuizScore")
     public double calculateQuizScore(@RequestBody List<Long> selectedAnswerIds) {
         return answerService.calculateQuizScore(selectedAnswerIds);

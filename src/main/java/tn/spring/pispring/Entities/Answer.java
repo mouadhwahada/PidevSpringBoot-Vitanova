@@ -22,8 +22,10 @@ public class Answer {
     @JsonProperty("textAnswer")
     String textAnswer;
 
-    @JsonIgnore
+ /*  @JsonIgnore
     @JsonProperty("question")
     @ManyToOne
     Question question;
+
+  */
 }

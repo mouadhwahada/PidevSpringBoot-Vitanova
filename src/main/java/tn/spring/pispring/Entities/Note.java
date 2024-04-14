@@ -22,8 +22,6 @@ public class Note implements Serializable {
     Long idNote;
     @JsonProperty("valueNote")
     double valueNote;
-    @JsonProperty("operation")
-    String operation;
     @JsonProperty("descNote")
     String descNote;
 

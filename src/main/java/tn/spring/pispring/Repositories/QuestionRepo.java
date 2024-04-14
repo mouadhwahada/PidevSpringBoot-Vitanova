@@ -12,8 +12,11 @@ import java.util.List;
 @Repository
 public interface QuestionRepo extends JpaRepository<Question,Long> {
     Question findQuestionBytextQ(String textQ);
-    @Query("SELECT q FROM Question q WHERE q.quiz.idQuiz = :quizId")
+   /* @Query("SELECT q FROM Question q WHERE q.quiz.idQuiz = :quizId")
     List<Question> findByQuizId(@Param("quizId") Long quizId);
     @Query("SELECT q FROM Question q LEFT JOIN FETCH q.answerList WHERE q.quiz.idQuiz = :quizId")
     List<Question> findQuestionsWithAnswersByQuizId(@Param("quizId") Long quizId);
+
+    */
+    Question findQuestionByIdQuestion(Long idQuestion);
 }

@@ -26,6 +26,8 @@ public class QuestionService implements QuestionInterface {
     QuizRepo quizRepo;
     @Autowired
     AnswerRepo answerRepo;
+
+
     @Override
     public Question addQuestion(Question question) {
         return questionRepo.save(question);
@@ -61,7 +63,7 @@ public class QuestionService implements QuestionInterface {
         return questionRepo.findById(id).get();
     }
 
-    public Question addQuestiontoQuiz(String titleQuiz, Question question) {
+ /*   public Question addQuestiontoQuiz(String titleQuiz, Question question) {
         Quiz quiz = quizRepo.findBytitleQuiz(titleQuiz);
         if (quiz != null) {
             question.setQuiz(quiz);
@@ -69,11 +71,66 @@ public class QuestionService implements QuestionInterface {
             return questionRepo.save(question);
 
 
+    }*/
+
+
+    public Question addQuestionToQuiz(Long idQuiz, Long idQuestion) {
+        Question question =findQuestionById(idQuestion);
+        Quiz quiz = quizRepo.findQuizByIdQuiz(idQuiz);
+
+        if (question != null && quiz != null) {
+            quiz.getQuestionList().add(question);
+            // Mettre à jour la table associative
+            quizRepo.save(quiz);
+        }
+
+        return question;
+    }
+    public Question removeQuestionFromQuiz(Long idQuestion, Long idQuiz) {
+        Quiz quiz=quizRepo.findQuizByIdQuiz(idQuiz);
+        Question question = findQuestionById(idQuestion);
+
+        if (question != null && quiz != null) {
+            List<Question> questionList = quiz.getQuestionList();
+            // Supprimer la réponse de la liste de réponses associée à la question
+            boolean removed = questionList.removeIf(q -> q.getIdQuestion() == idQuestion);
+            if (removed) {
+                // Mettre à jour la table associée uniquement si la réponse a été retirée avec succès
+                quizRepo.save(quiz);
+                return question;
+            }
+        }
+        return null;
     }
 
 
+    public List<Answer> getAnswersForQuestion(Long idQuestion) {
+        Question question = questionRepo.findById(idQuestion).orElse(null);
+        if (question != null) {
+            return question.getAnswerList();
+        } else {
+            return null;
+        }
+    }
+    public List<Question> getQuestionsWithAnswersForQuiz(Long quizId) {
+        Quiz quiz = quizRepo.findQuizByIdQuiz(quizId);
+        if (quiz != null) {
+            List<Question> questions = quiz.getQuestionList();
+            for (Question question : questions) {
+                List<Answer> answers = getAnswersForQuestion(question.getIdQuestion());
+                question.setAnswerList(answers);
+            }
 
+            return questions;
+        } else {
+            return null;
+        }
+    }
 }
+
+
+
+
 
 
 

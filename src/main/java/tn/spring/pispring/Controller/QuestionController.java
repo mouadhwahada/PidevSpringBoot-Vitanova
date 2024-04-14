@@ -19,10 +19,10 @@ import java.util.Optional;
 public class QuestionController {
     @Autowired
     QuestionService questionService;
-    @PostMapping("/addQuestiontoQuiz")
+  /*  @PostMapping("/addQuestiontoQuiz")
     public Question addQuestiontoQuiz(@RequestParam String titleQuiz,@RequestBody Question question) {
         return questionService.addQuestiontoQuiz(titleQuiz, question);
-    }
+    }*/
 
     @PostMapping("/addQuestion")
     public Question addQuestion(@RequestBody Question question) {
@@ -56,7 +56,21 @@ public class QuestionController {
         return questionService.findQuestionById(id);
     }
 
+    @GetMapping("/getAnswersForQuestion/{idQuestion}")
+    public List<Answer> getAnswersForQuestion(@PathVariable Long idQuestion) {
+        return questionService.getAnswersForQuestion(idQuestion);
+    }
+    @PostMapping("/addQuestionToQuiz/{idQuiz}/{idQuestion}")
+    public Question addQuestionToQuiz(@PathVariable Long idQuiz, @PathVariable Long idQuestion) {
+        return questionService.addQuestionToQuiz(idQuiz, idQuestion);
+    }
+    @DeleteMapping("/removeQuestionFromQuiz/{idQuiz}/{idQuestion}")
+    public Question removeQuestionFromQuiz(@PathVariable Long idQuiz, @PathVariable Long idQuestion) {
+        return questionService.removeQuestionFromQuiz(idQuestion, idQuiz);
+    }
 
-
-
+    @GetMapping("/getQuestionsWithAnswersForQuiz/{quizId}")
+    public List<Question> getQuestionsWithAnswersForQuiz(@PathVariable Long quizId) {
+        return questionService.getQuestionsWithAnswersForQuiz(quizId);
+    }
 }

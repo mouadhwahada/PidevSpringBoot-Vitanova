@@ -49,4 +49,8 @@ public class NoteController {
         return noteService.evaluateQuizScore(quizScore);
     }
 
+    @GetMapping("/StatisticsOfNotes")
+    public double[] StatisticsOfNotes() {
+        return noteService.StatisticsOfNotes();
+    }
 }

@@ -25,12 +25,10 @@ public class Quiz implements Serializable {
     String topicQuiz;
 
 
-    @JsonIgnore
+
     @JsonProperty("questionList")
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     List<Question> questionList;
 
-   @JsonIgnore
-    @OneToMany(mappedBy = "quiz")
-    List<Note>noteList;
+
 }

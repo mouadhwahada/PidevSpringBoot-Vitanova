@@ -1,11 +1,9 @@
 package tn.spring.pispring.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -20,9 +18,13 @@ public class React implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     String Type;
+    @ToString.Exclude
+    @JsonIgnore
     String User;
     LocalDateTime Date;
 
+    @ToString.Exclude
+    @JsonIgnore
     @ManyToOne
     private Commentaire commentaire;
 }

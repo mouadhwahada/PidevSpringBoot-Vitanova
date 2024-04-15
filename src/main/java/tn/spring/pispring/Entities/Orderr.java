@@ -2,6 +2,7 @@ package tn.spring.pispring.Entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,24 +22,31 @@ public class Orderr implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int idOrder;
     @Temporal(TemporalType.DATE)
-    private Date dateOrder;
+    public Date dateOrder;
     public OrderStatus status;
     public float costOrder;
+    public String codeOrder; // Champ pour le code de commande
 
-    @OneToMany(mappedBy = "orderr")
+    private String codeQR;
+
+    @OneToMany(mappedBy = "orderr",cascade = CascadeType.ALL)
     @ToString.Exclude
     @JsonIgnore
     public List<OrderItem> orderItems;
 
 
     @ManyToOne
-    @ToString.Exclude
-    @JsonIgnore
+
     User user;
 
 
+
+    @OneToOne(mappedBy = "orderr")
     @ToString.Exclude
     @JsonIgnore
-    @OneToOne(mappedBy = "orderr")
     private Delivery delivery;
+
+
+
 }
+

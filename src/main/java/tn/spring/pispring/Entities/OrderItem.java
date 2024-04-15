@@ -1,6 +1,7 @@
 package tn.spring.pispring.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,14 +21,18 @@ public class OrderItem implements Serializable {
     public int idOrderItem;
     public int quantity;
 
+    @Column(name = "paid", nullable = false)
+    private boolean paid = false;
+
     @ManyToOne
-    @ToString.Exclude
+
     public Product product;
 
     @ManyToOne
-    @ToString.Exclude
-    @JsonIgnore
+
     public Orderr orderr;
+
+
 
     @ManyToOne
 

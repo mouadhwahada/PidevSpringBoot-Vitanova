@@ -19,6 +19,8 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String userName;
+    private String email;
+
     private String password;
     private Date datenaissance;
     private Float weight;
@@ -34,24 +36,36 @@ public class User implements Serializable {
 
 
     @OneToOne(mappedBy = "user")
+    @ToString.Exclude
+    @JsonIgnore
     private Abonnement abonnement;
 
 
     @ManyToOne
+    @ToString.Exclude
+    @JsonIgnore
     Role role;
 
     @ManyToOne
-    private NutritionalGoal nutritionalGoal;
-    @OneToOne
-    private Fidelity fidelity;
-
     @ToString.Exclude
     @JsonIgnore
+    private NutritionalGoal nutritionalGoal;
+
+    @OneToOne
+    @ToString.Exclude
+    @JsonIgnore
+    private Fidelity fidelity;
+
+
     @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    @JsonIgnore
     public List<Orderr> orderrs;
 
 
     @OneToMany(mappedBy = "userworkout")
+    @ToString.Exclude
+    @JsonIgnore
     private  List<FollowedProgram> followedProgramsuser;
 
 
@@ -59,6 +73,8 @@ public class User implements Serializable {
   //  private List<Post> posts;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @JsonIgnore
     private List<Commentaire> commentaires;
 
 }

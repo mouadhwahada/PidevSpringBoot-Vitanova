@@ -1,10 +1,8 @@
 package tn.spring.pispring.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,8 +19,13 @@ public class Workoutprogram implements Serializable {
     private String name;
     private String description;
     private String duration ;
-    @OneToMany(mappedBy = "workoutprograms",cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "workoutprograms")
+
     private List<Exercise> exercises;
-    @OneToMany(mappedBy = "workoutprogramss",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "workoutprogramss")
+    @ToString.Exclude
+    @JsonIgnore
     private  List<FollowedProgram> followedPrograms;
 }

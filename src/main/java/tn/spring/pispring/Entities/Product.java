@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -27,13 +28,14 @@ public class Product implements Serializable {
     public TypeProduit type;
     public boolean isfavourite=false;
     public String image;
-    // @Temporal(TemporalType.TIMESTAMP)
-    //public Date dateAdded;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateAdded;
+
 
     @OneToMany(mappedBy = "product")
-
-    @JsonIgnore
     @ToString.Exclude
+    @JsonIgnore
+
     private List<OrderItem> orderItems;
 
 

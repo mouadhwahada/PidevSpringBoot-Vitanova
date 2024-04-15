@@ -1,6 +1,7 @@
 package tn.spring.pispring.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +26,9 @@ public class NutritionalGoal implements Serializable {
     private float weight_goal;
     private int Duration;
 
+
+    @ToString.Exclude
+    @JsonIgnore
     @OneToMany(mappedBy = "nutritionalGoal")
     private List<User> userList;
 

@@ -1,11 +1,9 @@
 package tn.spring.pispring.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -22,6 +20,12 @@ public class Role implements Serializable {
     private Long id;
     private String name;
 
+
+
+
+
     @OneToMany(mappedBy = "role")
+    @ToString.Exclude
+    @JsonIgnore
     List<User>users;
 }

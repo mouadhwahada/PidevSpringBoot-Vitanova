@@ -19,7 +19,8 @@ import java.nio.file.Paths;
 @CrossOrigin("*")
 public class FileController {
 
-    private static final String UPLOAD_DIR = "./uploads/";
+    private static final String UPLOAD_DIR = "C:/xampplassoued/htdocs/img/";
+
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
@@ -44,16 +45,17 @@ public class FileController {
             Path file = Paths.get(UPLOAD_DIR).resolve(filename);
             Resource resource = new UrlResource(file.toUri());
 
-            if (resource.exists() || resource.isReadable()) {
-                return ResponseEntity
-                        .ok()
+            if (resource.exists() && resource.isReadable()) {
+                return ResponseEntity.ok()
                         .contentType(MediaType.IMAGE_JPEG)
                         .body(resource);
             } else {
-                throw new RuntimeException("Could not read the file!");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(null); // or return a custom error message
             }
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("Error: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null); // or return a custom error message
         }
     }
 }

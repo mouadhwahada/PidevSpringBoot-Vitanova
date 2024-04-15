@@ -1,4 +1,4 @@
-package tn.spring.pispring.Entities;
+package tn.spring.pispring.config.JWT;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,10 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class JwtRequest {
-
-    String username;
-    String password;
-
-
+public class NewTokensResponses {
+    private String refreshToken;
+    private String newAccessToken;
 }

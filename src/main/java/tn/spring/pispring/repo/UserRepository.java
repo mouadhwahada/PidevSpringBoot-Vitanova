@@ -1,14 +1,24 @@
 package tn.spring.pispring.repo;
 
 
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import tn.spring.pispring.Entities.Role;
 import tn.spring.pispring.Entities.User;
-import  org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Map;
-
+import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User,Long> {
-    public User findByUsername(String username);
+    Optional<User> findByEmail(String username);
+    //User findByUsername(String username);
+    Optional<User> findByUsername(String username);
+    boolean existsByUsername(String username);
+
+    boolean existsByEmail(String email);
+
+    List<User> findByRolesContains(Role role);
 
 
 }

@@ -2,27 +2,29 @@ package tn.spring.pispring.Entities;
 
 
 import lombok.*;
+import org.hibernate.annotations.NaturalId;
+import tn.spring.pispring.dto.RoleName;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Entity
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-
-@Setter
-@Table(name = "roles")
+@ToString
 public class Role {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private Long roleId;
-    private String roleName;
+    @Enumerated(EnumType.STRING)
+    @NaturalId
+    @Column(length = 60)
+    private RoleName name;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "role")
-    private Set <UserRole> userRoles=new HashSet<>();
+
 
 
 }

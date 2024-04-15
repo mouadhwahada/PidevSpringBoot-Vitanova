@@ -10,24 +10,30 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class React implements Serializable {
+public class Comment implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Enumerated(EnumType.STRING)
-    TypeReact typeReact;
+    private String content;
     @Column(columnDefinition = "TIMESTAMP")
-    LocalDateTime createdAt;
-    @ManyToOne
-    private User author;
+    private LocalDateTime createdAt;
     @JsonIgnore
     @ManyToOne
     private Post post;
+
+    @ManyToOne
+    private User author;
+    @JsonIgnore
+    @OneToMany(mappedBy = "comment")
+    private List<SubComment> subComments ;
+
 }

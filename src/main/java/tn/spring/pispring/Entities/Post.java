@@ -1,14 +1,13 @@
 package tn.spring.pispring.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -22,14 +21,23 @@ public class Post implements Serializable {
     private Long id;
     private String title;
     private String content;
-    private String author;
+    private String imageName;
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime updatedAt;
 
-    //@ManyToOne
-    //private User author;
-
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Commentaire> commentaires ;
+    private int nbViews;
+    @ToString.Exclude
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User author;
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
+    private List<Comment> comments;
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(mappedBy = "post" ,cascade = CascadeType.ALL)
+    private List<React> reactions ;
 
 }

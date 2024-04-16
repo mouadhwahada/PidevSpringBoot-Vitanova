@@ -1,11 +1,13 @@
 package tn.spring.pispring.Entities;
 
 
-<<<<<<< HEAD
-=======
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
->>>>>>> 9fff4c4cd8f02a68082fc6526300b075cb0d6d09
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,7 +25,6 @@ public class Role {
 
     @Id
 
-<<<<<<< HEAD
     private Long roleId;
     private String roleName;
 
@@ -31,7 +32,10 @@ public class Role {
     private Set <UserRole> userRoles=new HashSet<>();
 
 
-=======
+
+
+
+
 
 
 
@@ -40,5 +44,5 @@ public class Role {
     @ToString.Exclude
     @JsonIgnore
     List<User>users;
->>>>>>> 9fff4c4cd8f02a68082fc6526300b075cb0d6d09
+
 }

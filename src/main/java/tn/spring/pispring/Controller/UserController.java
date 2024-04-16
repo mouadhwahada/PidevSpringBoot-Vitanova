@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package tn.spring.pispring.controller;
 
 
@@ -69,7 +69,7 @@ public class UserController {
     @ExceptionHandler(UserFoundException.class)
     public ResponseEntity<?> exceptionHandler(UserFoundException ex){
         return exceptionHandler(ex);
-=======
+
 package tn.spring.pispring.Controller;
 
 
@@ -104,13 +104,15 @@ public class UserController {
     @DeleteMapping("/retrieveUser/{idUser}")
     public User retrieveUser(@PathVariable("idUser")long idUser) {
         return userInterface.retrieveUser(idUser);
->>>>>>> 9fff4c4cd8f02a68082fc6526300b075cb0d6d09
+
     }
 
 
 
-<<<<<<< HEAD
-=======
+    }
 
->>>>>>> 9fff4c4cd8f02a68082fc6526300b075cb0d6d09
+
+
+
+
 }

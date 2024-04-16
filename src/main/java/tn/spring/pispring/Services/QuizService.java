@@ -7,6 +7,18 @@ import tn.spring.pispring.Entities.Quiz;
 import tn.spring.pispring.Interfaces.QuizInterface;
 import tn.spring.pispring.Repositories.QuizRepo;
 
+
+import org.webjars.NotFoundException;
+import tn.spring.pispring.Entities.Answer;
+import tn.spring.pispring.Entities.Question;
+import tn.spring.pispring.Entities.Quiz;
+import tn.spring.pispring.Interfaces.QuizInterface;
+import tn.spring.pispring.Repositories.AnswerRepo;
+import tn.spring.pispring.Repositories.QuestionRepo;
+import tn.spring.pispring.Repositories.QuizRepo;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +26,15 @@ import java.util.Optional;
 public class QuizService implements QuizInterface {
     @Autowired
     QuizRepo quizRepo;
+
+    @Autowired
+    QuestionRepo questionRepo;
+    @Autowired
+    AnswerRepo answerRepo;
+    @Autowired
+    AnswerService answerService;
+    @Autowired
+    QuestionService questionService;
     @Override
     public Quiz addQuiz(Quiz quiz) {
         return quizRepo.save(quiz);
@@ -34,6 +55,12 @@ public class QuizService implements QuizInterface {
             return quizRepo.save(existingQuiz);
         } else {
             // Si aucun quiz n'est trouvé avec l'ID donné, retournez null
+
+            Quiz existingQuiz = optionalQuiz.get();
+            existingQuiz.setTitleQuiz(updatedQuiz.getTitleQuiz());
+            existingQuiz.setTopicQuiz(updatedQuiz.getTopicQuiz());
+            return quizRepo.save(existingQuiz);
+        } else {
             return null;
         }
     }
@@ -53,4 +80,18 @@ public class QuizService implements QuizInterface {
     public Quiz findQuizById(long id) {
         return quizRepo.findById(id).get();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

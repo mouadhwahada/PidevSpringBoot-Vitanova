@@ -5,6 +5,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.io.Serializable;
 
 @Entity
@@ -23,6 +29,7 @@ public class Fidelity implements Serializable {
 
     @ToString.Exclude
     @JsonIgnore
+
     @OneToOne(mappedBy = "fidelity")
     private User user;
 }

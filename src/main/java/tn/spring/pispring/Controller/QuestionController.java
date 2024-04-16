@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import tn.spring.pispring.Entities.Answer;
 import tn.spring.pispring.Entities.Question;
 import tn.spring.pispring.Services.QuestionService;
 
@@ -14,10 +16,16 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
+@CrossOrigin("http://localhost:4200")
 @AllArgsConstructor
 public class QuestionController {
     @Autowired
     QuestionService questionService;
+
+  /*  @PostMapping("/addQuestiontoQuiz")
+    public Question addQuestiontoQuiz(@RequestParam String titleQuiz,@RequestBody Question question) {
+        return questionService.addQuestiontoQuiz(titleQuiz, question);
+    }*/
 
     @PostMapping("/addQuestion")
     public Question addQuestion(@RequestBody Question question) {
@@ -64,5 +72,22 @@ public class QuestionController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+
+    @GetMapping("/getAnswersForQuestion/{idQuestion}")
+    public List<Answer> getAnswersForQuestion(@PathVariable Long idQuestion) {
+        return questionService.getAnswersForQuestion(idQuestion);
+    }
+    @PostMapping("/addQuestionToQuiz/{idQuiz}/{idQuestion}")
+    public Question addQuestionToQuiz(@PathVariable Long idQuiz, @PathVariable Long idQuestion) {
+        return questionService.addQuestionToQuiz(idQuiz, idQuestion);
+    }
+    @DeleteMapping("/removeQuestionFromQuiz/{idQuiz}/{idQuestion}")
+    public Question removeQuestionFromQuiz(@PathVariable Long idQuiz, @PathVariable Long idQuestion) {
+        return questionService.removeQuestionFromQuiz(idQuestion, idQuiz);
+    }
+
+    @GetMapping("/getQuestionsWithAnswersForQuiz/{quizId}")
+    public List<Question> getQuestionsWithAnswersForQuiz(@PathVariable Long quizId) {
+        return questionService.getQuestionsWithAnswersForQuiz(quizId);
     }
 }

@@ -8,6 +8,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -52,6 +53,11 @@ public class User implements Serializable {
     private NutritionalGoal nutritionalGoal;
 
     @OneToOne
+    private NutritionalGoal nutritionalGoal;
+    @OneToOne
+    private Fidelity fidelity;
+
+    @OneToOne
     @ToString.Exclude
     @JsonIgnore
     private Fidelity fidelity;
@@ -67,6 +73,14 @@ public class User implements Serializable {
     @ToString.Exclude
     @JsonIgnore
     private  List<FollowedProgram> followedProgramsuser;
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name="user_workout_program",
+            joinColumns = @JoinColumn(name="user_id"),
+            inverseJoinColumns = @JoinColumn(name="workout_id")
+    )
+    private Set<Workoutprogram> workoutPrograms;
 
 
 //    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)

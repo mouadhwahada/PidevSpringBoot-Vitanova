@@ -5,6 +5,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +23,7 @@ import java.util.List;
 @Entity
 public class Commentaire implements Serializable {
 
-  @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
    Long Id;
     String Contenu;
@@ -47,6 +54,8 @@ public class Commentaire implements Serializable {
     private List<Commentaire> commentaires;
     @ToString.Exclude
     @JsonIgnore
+
+    private List<Commentaire> commentaires;
     @ManyToOne
     Commentaire c;
 

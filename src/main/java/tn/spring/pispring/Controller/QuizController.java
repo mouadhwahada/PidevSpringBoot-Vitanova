@@ -4,6 +4,12 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import tn.spring.pispring.Entities.Answer;
+import tn.spring.pispring.Entities.Question;
 import tn.spring.pispring.Entities.Quiz;
 import tn.spring.pispring.Services.QuizService;
 
@@ -48,4 +54,5 @@ public class QuizController {
     public Quiz findQuizById(@PathVariable("id")  long id) {
         return quizService.findQuizById(id);
     }
+
 }

@@ -16,7 +16,7 @@ public class FollowedProgram implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id_FollowedProgram;
     private String weightGoal;
     private String steps;
     private String duration;
@@ -30,6 +30,13 @@ public class FollowedProgram implements Serializable {
     Workoutprogram  workoutprogramss ;
 
 
+
+    private double currentWeight;
+    private double waist;
+    private double hip;
+    private double chest;
+
+    @JsonIgnore
     @ManyToOne
     @ToString.Exclude
     @JsonIgnore

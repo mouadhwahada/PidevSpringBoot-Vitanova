@@ -1,6 +1,9 @@
 package tn.spring.pispring.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,5 +28,12 @@ public class Quiz implements Serializable {
     @OneToMany(mappedBy = "quiz")
     @JsonIgnore
     @ToString.Exclude
+
+
+
+    @JsonProperty("questionList")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     List<Question> questionList;
+
+
 }

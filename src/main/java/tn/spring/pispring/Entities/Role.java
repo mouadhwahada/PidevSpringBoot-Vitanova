@@ -1,24 +1,40 @@
 package tn.spring.pispring.Entities;
 
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
 import lombok.*;
 
-import java.io.Serializable;
-import java.util.List;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
+
 @Setter
-public class Role implements Serializable {
+@Table(name = "roles")
+public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
+
+    private Long roleId;
+    private String roleName;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "role")
+    private Set <UserRole> userRoles=new HashSet<>();
+
+
+
+
+
 
 
 
@@ -28,4 +44,5 @@ public class Role implements Serializable {
     @ToString.Exclude
     @JsonIgnore
     List<User>users;
+
 }

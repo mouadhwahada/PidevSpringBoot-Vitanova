@@ -7,5 +7,6 @@ import tn.spring.pispring.Entities.Quiz;
 @Repository
 public interface QuizRepo extends JpaRepository<Quiz,Long> {
     Quiz findBytitleQuiz( String titleQuiz);
+
     Quiz findQuizByIdQuiz(Long idQuiz);
 }

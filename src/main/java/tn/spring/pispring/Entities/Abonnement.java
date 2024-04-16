@@ -1,5 +1,9 @@
 package tn.spring.pispring.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +31,9 @@ public class Abonnement implements Serializable {
     private LocalDate start_date;
     private LocalDate end_date;
 
+
+    @ToString.Exclude
+    @JsonIgnore
     @OneToOne
     private User user;
 

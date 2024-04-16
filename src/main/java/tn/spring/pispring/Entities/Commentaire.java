@@ -1,6 +1,10 @@
 package tn.spring.pispring.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,15 +35,26 @@ public class Commentaire implements Serializable {
     @ManyToOne
     private Post post;
 
+
+ @ToString.Exclude
+ @JsonIgnore
     @ManyToOne
     private User user;
 
 
 
-    @OneToMany(mappedBy = "commentaire", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "commentaire")
+    @ToString.Exclude
+    @JsonIgnore
     private List<React> reactions ;
 
     @OneToMany(mappedBy ="c" )
+    @ToString.Exclude
+    @JsonIgnore
+    private List<Commentaire> commentaires;
+    @ToString.Exclude
+    @JsonIgnore
+
     private List<Commentaire> commentaires;
     @ManyToOne
     Commentaire c;

@@ -8,6 +8,7 @@ import lombok.*;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,7 +21,7 @@ public class Delivery implements Serializable {
     private int deliveryId;
 
     @Temporal(TemporalType.DATE)
-    private LocalDate deliveryDate;
+    private Date deliveryDate;
 
     private String deliveryAddress;
     private String deliveryPostalCode;
@@ -29,6 +30,7 @@ public class Delivery implements Serializable {
 
     @OneToOne
     private Orderr orderr;
+
 
     @ToString.Exclude
     @JsonIgnore

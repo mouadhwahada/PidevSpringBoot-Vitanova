@@ -2,6 +2,7 @@ package tn.spring.pispring.Entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,6 +30,12 @@ public class NutritionalGoal implements Serializable {
     @Transient
     private long daily_calorie_goal;
 
+
+
+    @ToString.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "nutritionalGoal")
+    private List<User> userList;
 
     @OneToOne
     @JoinColumn(name = "user_id") // Nom de la colonne dans la table NutritionalGoal qui fait référence à l'ID de l'utilisateur

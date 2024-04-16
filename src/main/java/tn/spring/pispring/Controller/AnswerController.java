@@ -1,6 +1,13 @@
 package tn.spring.pispring.Controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import tn.spring.pispring.Entities.Answer;
+import tn.spring.pispring.Services.AnswerService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +22,8 @@ import java.util.Map;
 @CrossOrigin("http://localhost:4200")
 @AllArgsConstructor
 public class AnswerController {
+    AnswerService answerService;
+
     @Autowired
     AnswerService answerService;
  /*   @PostMapping("/addAnswerToQuestion")
@@ -61,6 +70,7 @@ public class AnswerController {
     public Answer findAnswerById(@PathVariable ("id") long id) {
         return answerService.findAnswerById(id);
     }
+
 
   /*  @GetMapping("/getAnswersForQuestion/{questionId}")
     public List<Answer> getAnswersForQuestion(@PathVariable("questionId") Long questionId) {

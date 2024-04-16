@@ -3,10 +3,7 @@ package tn.spring.pispring.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
@@ -23,6 +20,12 @@ public class Exercise implements Serializable {
     private String namexercise;
     private Integer sets;
     private Integer reps ;
+    private String repo ;
+    @ToString.Exclude
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    Workoutprogram  workoutprograms ;
+
     private Integer repo ;
     private Integer duration;
     private String image;

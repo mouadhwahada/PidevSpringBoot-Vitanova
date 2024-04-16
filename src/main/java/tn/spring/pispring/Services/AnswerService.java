@@ -1,5 +1,15 @@
 package tn.spring.pispring.Services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import tn.spring.pispring.Entities.Answer;
+import tn.spring.pispring.Entities.Question;
+import tn.spring.pispring.Interfaces.AnswerInterface;
+import tn.spring.pispring.Repositories.AnswerRepo;
+
+import java.util.List;
+import java.util.Optional;
+
 import jakarta.transaction.Transactional;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +30,7 @@ import java.util.*;
 public class AnswerService implements AnswerInterface {
     @Autowired
     AnswerRepo answerRepo;
+
     @Autowired
     QuestionRepo questionRepo;
     @Autowired
@@ -41,6 +52,21 @@ public class AnswerService implements AnswerInterface {
         Optional<Answer> optionalAnswer = answerRepo.findById(id);
 
         if (optionalAnswer.isPresent()) {
+            // Si la réponse existe, mettez à jour ses données
+            Answer existingAnswer = optionalAnswer.get();
+            existingAnswer.setScore(updatedAnswer.getScore());
+            existingAnswer.setTextAnswer(updatedAnswer.getTextAnswer());
+            // Continuez de cette manière pour les autres propriétés...
+
+            // Enregistrez la réponse mise à jour dans la base de données
+            return answerRepo.save(existingAnswer);
+        } else {
+            // Si aucune réponse n'est trouvée avec l'ID donné, retournez null
+            return null;
+        }
+    }
+
+
             Answer existingAnswer = optionalAnswer.get();
             existingAnswer.setScore(updatedAnswer.getScore());
             existingAnswer.setTextAnswer(updatedAnswer.getTextAnswer());
@@ -65,6 +91,8 @@ public class AnswerService implements AnswerInterface {
     public Answer findAnswerById(long id) {
         return answerRepo.findById(id).get();
     }
+}
+
 
  /*   public Answer addAnswerToQuestion(String textQ, Answer answer) {
         Question question = questionRepo.findQuestionBytextQ(textQ);

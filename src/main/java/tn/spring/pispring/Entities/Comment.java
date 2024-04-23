@@ -1,42 +1,37 @@
 package tn.spring.pispring.Entities;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post implements Serializable {
+@Entity
+public class Comment implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
     private String content;
-    private String imageName;
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
-    @Column(columnDefinition = "TIMESTAMP")
-    private LocalDateTime updatedAt;
-
-    private int nbViews;
-    @ToString.Exclude
+    @JsonIgnore
+    @ManyToOne
+    private Post post;
     @ManyToOne
     private User author;
     @JsonIgnore
-    @ToString.Exclude
-    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
-    private List<Comment> comments;
-    @JsonIgnore
-    @ToString.Exclude
-    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
-    private List<React> reactions ;
+    @OneToMany(mappedBy = "comment",cascade = CascadeType.ALL)
+    private List<SubComment> subComments ;
 
 }

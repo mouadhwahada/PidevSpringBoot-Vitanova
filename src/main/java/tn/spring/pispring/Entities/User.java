@@ -32,33 +32,42 @@ public class User implements Serializable {
 
     //enumeration private Objectif //
 
-
+    @JsonIgnore
     @OneToOne(mappedBy = "user")
     private Abonnement abonnement;
 
-
+    @JsonIgnore
     @ManyToOne
     Role role;
-
+    @JsonIgnore
     @ManyToOne
     private NutritionalGoal nutritionalGoal;
+    @JsonIgnore
     @OneToOne
-    private Fidelite fidelite;
+    private Fidelity fidelity;
 
     @ToString.Exclude
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     public List<Orderr> orderrs;
-
-
+    @ToString.Exclude
+    @JsonIgnore
     @OneToMany(mappedBy = "userworkout")
     private  List<FollowedProgram> followedProgramsuser;
-
-
-//    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-  //  private List<Post> posts;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Commentaire> commentaires;
-
+    @ToString.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "author")
+    private List<Post> posts;
+    @ToString.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "author",cascade = CascadeType.ALL)
+    private List<Comment> comments;
+    @ToString.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "author",cascade = CascadeType.ALL)
+    private List<SubComment> subcomments;
+    @ToString.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "author",cascade = CascadeType.ALL)
+    private List<React> reacts;
 }

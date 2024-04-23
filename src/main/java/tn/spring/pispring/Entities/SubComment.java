@@ -1,41 +1,33 @@
 package tn.spring.pispring.Entities;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import lombok.*;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class React implements Serializable {
+public class SubComment implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Enumerated(EnumType.STRING)
-    TypeReact typeReact;
+    private String content;
     @Column(columnDefinition = "TIMESTAMP")
     LocalDateTime createdAt;
-
-    String Type;
-    @ToString.Exclude
     @JsonIgnore
-    String User;
-    LocalDateTime Date;
-
-    @ToString.Exclude
-    @JsonIgnore
-
+    @ManyToOne
+    private Comment comment;
     @ManyToOne
     private User author;
-    @JsonIgnore
-    @ManyToOne
-    private Post post;
+
 }

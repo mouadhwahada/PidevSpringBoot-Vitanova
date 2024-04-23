@@ -1,7 +1,9 @@
 
-package tn.spring.pispring.controller;
+
+package tn.spring.pispring.Controller;
 
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,6 +22,11 @@ import java.util.Set;
 @CrossOrigin("*")
 public class UserController {
 
+//test test
+
+
+
+
     @Autowired
     private UserService userService;
 
@@ -32,7 +39,6 @@ public class UserController {
 
 
         user.setProfile("default.png");
-        //encoding password withbcryptpasswordencoder
 
         user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
 
@@ -70,42 +76,10 @@ public class UserController {
     public ResponseEntity<?> exceptionHandler(UserFoundException ex){
         return exceptionHandler(ex);
 
-package tn.spring.pispring.Controller;
 
 
-import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-import tn.spring.pispring.Entities.User;
-import tn.spring.pispring.Interfaces.UserInterface;
 
-import java.util.List;
 
-@AllArgsConstructor
-@RequestMapping("/user")
-@RestController
-public class UserController {
-
-    UserInterface userInterface;
-
-    @PostMapping("/createuser")
-    public User CreateUser(User user) {
-        return userInterface.CreateUser(user);
-    }
-
-    @GetMapping("/retrieveAllUsers")
-    public List<User> retrieveAllUsers() {
-        return userInterface.retrieveAllUsers();
-    }
-    @PutMapping("/updateuser")
-    public User updateUser(@RequestBody User user) {
-        return userInterface.updateUser(user);
-    }
-
-    @DeleteMapping("/retrieveUser/{idUser}")
-    public User retrieveUser(@PathVariable("idUser")long idUser) {
-        return userInterface.retrieveUser(idUser);
-
-    }
 
 
 

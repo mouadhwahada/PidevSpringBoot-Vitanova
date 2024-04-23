@@ -1,12 +1,11 @@
 package tn.spring.pispring.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -17,11 +16,21 @@ import java.io.Serializable;
 public class Exercise implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id_Exercice;
     private String namexercise;
-    private Integer stes;
+    private Integer sets;
     private Integer reps ;
     private String repo ;
+    @ToString.Exclude
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     Workoutprogram  workoutprograms ;
+
+    private Integer repo ;
+    private Integer duration;
+    private String image;
+
+    @ManyToOne
+    @JoinColumn(name="exercise_day_id")
+    private ExerciseDay exerciseDay;
 }

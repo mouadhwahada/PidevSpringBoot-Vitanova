@@ -1,6 +1,9 @@
 package tn.spring.pispring.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,20 +17,31 @@ import java.util.List;
 @Entity
 public class NutritionalGoal implements Serializable {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idNGoal;
 
-    private Long daily_calorie_goal;
-    private Long daily_protein_goal;
-    private Long daily_carbohydrates_goal;
+    private int duration;
+  private int height;
+  private int weight;
     private String goal;
-    private float weight_goal;
-    private int Duration;
+    private int weight_goal;
+    @Transient
+    private long daily_calorie_goal;
 
+
+
+    @ToString.Exclude
+    @JsonIgnore
     @OneToMany(mappedBy = "nutritionalGoal")
     private List<User> userList;
 
+    @OneToOne
+    @JoinColumn(name = "user_id") // Nom de la colonne dans la table NutritionalGoal qui fait référence à l'ID de l'utilisateur
+    private User user;
+
     @OneToMany(mappedBy = "nutritiongoal")
+    @JsonIgnore
     private List<NutritionTracking> NuttrackingList;
 }

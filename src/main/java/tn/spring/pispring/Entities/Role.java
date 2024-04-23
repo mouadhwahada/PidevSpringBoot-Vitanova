@@ -1,27 +1,48 @@
 package tn.spring.pispring.Entities;
 
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.io.Serializable;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import lombok.*;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
+
 @Setter
-public class Role implements Serializable {
+@Table(name = "roles")
+public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
+
+    private Long roleId;
+    private String roleName;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "role")
+    private Set <UserRole> userRoles=new HashSet<>();
+
+
+
+
+
+
+
+
+
 
     @OneToMany(mappedBy = "role")
+    @ToString.Exclude
+    @JsonIgnore
     List<User>users;
+
 }

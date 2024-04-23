@@ -1,12 +1,16 @@
 package tn.spring.pispring.Entities;
 
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -21,6 +25,12 @@ public class Fidelity implements Serializable {
     private Long id;
     private Long point;
     private String niveau;
+
+
+
+    @ToString.Exclude
+    @JsonIgnore
+
 
     @OneToOne(mappedBy = "fidelity")
     private User user;

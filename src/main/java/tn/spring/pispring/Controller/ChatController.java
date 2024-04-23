@@ -59,7 +59,7 @@ public class ChatController {
 
         ChatMessage chatMessage = chatService.addMessage(msg);
         messagingTemplate.convertAndSendToUser(
-                chatMessage.getRecipient().getUserName(),
+                chatMessage.getRecipient().getUsername(),
                 "/queue/messages",
                 chatMessage
         );

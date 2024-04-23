@@ -1,6 +1,7 @@
 package tn.spring.pispring.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,17 +17,25 @@ import java.util.List;
 public class OrderItem implements Serializable {
 
     @Id
-    @GeneratedValue (strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     public int idOrderItem;
     public int quantity;
-    @ManyToMany
-    @ToString.Exclude
-    @JsonIgnore
-    public List<Product> products;
+
+    @Column(name = "paid", nullable = false)
+    private boolean paid = false;
 
     @ManyToOne
-    @ToString.Exclude
-    @JsonIgnore
+
+    public Product product;
+
+    @ManyToOne
+
     public Orderr orderr;
+
+
+
+    @ManyToOne
+
+    public User user;
 
 }

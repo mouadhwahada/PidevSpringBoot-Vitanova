@@ -2,12 +2,10 @@ package tn.spring.pispring.Entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+import lombok.*;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -25,6 +23,16 @@ public class React implements Serializable {
     TypeReact typeReact;
     @Column(columnDefinition = "TIMESTAMP")
     LocalDateTime createdAt;
+
+    String Type;
+    @ToString.Exclude
+    @JsonIgnore
+    String User;
+    LocalDateTime Date;
+
+    @ToString.Exclude
+    @JsonIgnore
+
     @ManyToOne
     private User author;
     @JsonIgnore

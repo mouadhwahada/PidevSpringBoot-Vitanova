@@ -1,9 +1,10 @@
 package tn.spring.pispring.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+
 import lombok.*;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;

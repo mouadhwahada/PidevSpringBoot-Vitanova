@@ -1,6 +1,7 @@
 package tn.spring.pispring.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,16 +15,16 @@ import java.io.Serializable;
 public class Food implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idFood;
+    private long idFood;
     private String namefood;
-    private Long calories_per_serving ;
-    private Long  protein_per_serving;
-    private Long  carbohydrates_per_Serving;
-    private Long  fat_per_Serving;
-    private Long  fiber_per_Serving;
-    private Long  vitamins_per_Serving;
-    private Long  minerals_per_Serving;
-
+    private long calories_per_serving ;
+    private long  protein_per_serving;
+    private long  carbohydrates_per_Serving;
+    private long  fat_per_Serving;
+    private long  fiber_per_Serving;
+    private String vitamins_per_Serving;
+    private long  minerals_per_Serving;
+  @JsonIgnore
     @ManyToOne
     private NutritionTracking nuttrack;
 }

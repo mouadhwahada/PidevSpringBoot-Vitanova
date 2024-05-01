@@ -3,7 +3,10 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+<<<<<<< HEAD
 application.properties
+=======
+>>>>>>> 3b5791e8482f8840ab7ac5b517100eedf8323db2
 application.yml
 
 /log

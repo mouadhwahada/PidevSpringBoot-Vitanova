@@ -10,13 +10,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import tn.spring.pispring.Entities.Order;
 import tn.spring.pispring.Entities.Role;
 import tn.spring.pispring.Entities.User;
 import tn.spring.pispring.Interfaces.OTPInterface;
 import tn.spring.pispring.Interfaces.UserServiceInterface;
 import tn.spring.pispring.ServiceseExternes.MailSenderService;
+import tn.spring.pispring.dto.OrderStatus;
 import tn.spring.pispring.dto.ResetPass;
 import tn.spring.pispring.dto.RoleName;
+import tn.spring.pispring.repo.OrderRepository;
 import tn.spring.pispring.repo.RoleRepository;
 import tn.spring.pispring.repo.UserRepository;
 
@@ -26,6 +29,7 @@ import java.util.*;
 @Service
 public class
 UserServiceIMP implements UserServiceInterface {
+
 
     @Autowired
     UserRepository userRepository;
@@ -39,6 +43,9 @@ UserServiceIMP implements UserServiceInterface {
     @Autowired
     OTPInterface otpInterface;
 
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     public List<User> getAllUser() {
         return userRepository.findAll();
@@ -148,6 +155,17 @@ UserServiceIMP implements UserServiceInterface {
         user.setAddress(user1.getAddress());
         user.setNumber(user1.getNumber());
         User suser = userRepository.save(user);
+
+        Order order= new Order();
+        order.setAmount(0L);
+        order.setTotalAmount(0L);
+        order.setDiscount(0L);
+        order.setUser(suser);
+
+        order.setOrderStatus(OrderStatus.Pending);
+        orderRepository.save(order);
+
+
         if (suser != null) {
             //String Newligne = System.getProperty("line.separator");
             String url = "http://localhost:4200/verification" ;

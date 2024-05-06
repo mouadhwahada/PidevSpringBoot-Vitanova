@@ -29,6 +29,8 @@ public class User {
     private boolean valid ;
     private String token;
     private String image;
+    private int phoneNumber;
+    private  String Zone;
 
 
     @ManyToMany(fetch = FetchType.LAZY)

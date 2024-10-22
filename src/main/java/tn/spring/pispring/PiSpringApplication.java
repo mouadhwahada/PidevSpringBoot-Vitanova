@@ -2,6 +2,7 @@ package tn.spring.pispring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+<<<<<<< HEAD
 
 import org.springframework.boot.CommandLineRunner;
 
@@ -25,12 +26,20 @@ public class PiSpringApplication implements CommandLineRunner {
 private BCryptPasswordEncoder bCryptPasswordEncoder;
 public static void main(String[] args) {
 
+=======
+@SpringBootApplication
+public class PiSpringApplication {
+
+public static void main(String[] args) {
+
+>>>>>>> 3b5791e8482f8840ab7ac5b517100eedf8323db2
 		SpringApplication.run(PiSpringApplication.class, args);
 	}
 
 
 
 
+<<<<<<< HEAD
 	@Override
 	public void run(String... args) throws Exception {
 
@@ -68,3 +77,7 @@ public static void main(String[] args) {
 			e.printStackTrace();
 		}
 	}}
+=======
+
+	}
+>>>>>>> 3b5791e8482f8840ab7ac5b517100eedf8323db2
